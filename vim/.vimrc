@@ -33,14 +33,9 @@ if (has("termguicolors"))
 endif
 
 let g:onedark_termcolors=16
+
 colorscheme onedark
 syntax on
-" make comments and HTML attributes italic
-highlight Comment cterm=italic
-highlight htmlArg cterm=italic
-highlight xmlAttrib cterm=italic
-highlight Type cterm=italic
-highlight Normal cterm=none
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set nocompatible
