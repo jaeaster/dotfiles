@@ -7,6 +7,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
 
 " utilities
+Plug 'scrooloose/nerdtree' " Filesystem explorer
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
@@ -22,6 +23,7 @@ Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'itchyny/lightline.vim' " Status bar
 
 call plug#end()
+set rtp+=/usr/local/opt/fzf
 
 " Colorscheme related
 
