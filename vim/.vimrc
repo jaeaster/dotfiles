@@ -1,3 +1,4 @@
+let mapleader = ","
 call plug#begin('~/.config/vim/plugged')
 
 " colorschemes
@@ -80,4 +81,17 @@ set mat=2
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c,cpp setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+" SPLITS
+set splitbelow
+set splitright
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" KEY MAPPINGS
+nmap ; :Buffers<CR>
+nmap <leader>v :vsp<CR>
+nmap <leader>s :sp<CR>
 
