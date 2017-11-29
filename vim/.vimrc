@@ -48,7 +48,7 @@ set autoread
 set history=1000
 set textwidth=120
 
-set relativenumber
+set number
 
 set wrap
 set wrapmargin=8
