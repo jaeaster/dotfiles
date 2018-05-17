@@ -22,6 +22,7 @@ Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache fil
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'itchyny/lightline.vim' " Status bar
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 set rtp+=/usr/local/opt/fzf
