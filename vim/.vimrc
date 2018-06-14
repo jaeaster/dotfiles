@@ -20,8 +20,9 @@ Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
+" Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'itchyny/lightline.vim' " Status bar
+Plug 'fatih/vim-go'
 
 call plug#end()
 set rtp+=/usr/local/opt/fzf
@@ -50,6 +51,7 @@ set textwidth=120
 
 set number
 
+set formatoptions-=tc
 set wrap
 set wrapmargin=8
 set linebreak
@@ -78,7 +80,8 @@ set magic
 set showmatch
 set mat=2
 
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+filetype plugin indent on
+autocmd Filetype python setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c,cpp setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
