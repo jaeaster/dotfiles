@@ -82,7 +82,7 @@ set showmatch
 set mat=2
 
 filetype plugin indent on
-autocmd Filetype python setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c,cpp setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
