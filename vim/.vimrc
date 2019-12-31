@@ -1,4 +1,11 @@
 let mapleader = ","
+" Install VimPlug for Vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/vim/plugged')
 
 " colorschemes
@@ -9,7 +16,8 @@ Plug 'sheerun/vim-polyglot'
 
 " utilities
 Plug 'scrooloose/nerdtree' " Filesystem explorer
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
+Plug '/usr/local/opt/fzf' " Fuzzy file finder
+Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'tpope/vim-commentary' " toggle comments
@@ -20,19 +28,33 @@ Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-" Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
+Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'itchyny/lightline.vim' " Status bar
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 
 call plug#end()
+
 set rtp+=/usr/local/opt/fzf
 
-" Colorscheme related
+" Disable Arrow Keys
+nnoremap <Left> :echo "No Left for you!"<CR>
+vnoremap <Left> :<C-u>echo "No Left for you!"<CR>
+inoremap <Left> <C-o>:echo "No Left for you!"<CR>
 
-if (has("nvim"))
- let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+nnoremap <Right> :echo "No Right for you!"<CR>
+vnoremap <Right> :<C-u>echo "No Right for you!"<CR>
+inoremap <Right> <C-o>:echo "No Right for you!"<CR>
+
+nnoremap <Up> :echo "No Up for you!"<CR>
+vnoremap <Up> :<C-u>echo "No Up for you!"<CR>
+inoremap <Up> <C-o>:echo "No Up for you!"<CR>
+
+nnoremap <Down> :echo "No Down for you!"<CR>
+vnoremap <Down> :<C-u>echo "No Down for you!"<CR>
+inoremap <Down> <C-o>:echo "No Down for you!"<CR>
+
+" Colorscheme related
 
 if (has("termguicolors"))
   set termguicolors
@@ -40,8 +62,8 @@ endif
 
 let g:onedark_termcolors=16
 
-colorscheme onedark
 syntax on
+colorscheme onedark
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set nocompatible
