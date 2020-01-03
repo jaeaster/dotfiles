@@ -58,6 +58,8 @@ source $ZSH/oh-my-zsh.sh
 
 set -o vi
 
+EDITOR=vim
+
 export PYENV_ROOT="$HOME/.pyenv"
 # To enable shims and autocompletion
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
