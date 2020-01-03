@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ANDROID_HOME=$HOME/Library/Android/sdk
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/appfolio/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -56,9 +56,6 @@ bindkey "^[[A" history-substring-search-up
 bindkey "^[[B" history-substring-search-down
 source $ZSH/oh-my-zsh.sh
 
-source ${HOME}/.z.sh
-
-source ${HOME}/dotfiles/aws/codedeploy.sh
 set -o vi
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -71,7 +68,7 @@ export PATH=/Users/appfolio/.local/bin:$PATH
 # --hidden: Search hidden files and folders
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # User configuration
 

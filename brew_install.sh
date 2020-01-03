@@ -1,7 +1,7 @@
 #!/bin/bash
 
-declare -a BREW_PACKAGES=(neovim ripgrep fzf tmux)
-declare -a BREW_CASK_PACKAGEs=(alacritty)
+declare -a BREW_PACKAGES=(autojump neovim ripgrep fzf tmux)
+declare -a BREW_CASK_PACKAGEs=(alacritty amethyst karabiner-elements)
 
 brew update
 brew upgrade
