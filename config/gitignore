@@ -1,0 +1,12 @@
+# Emacs
+*~
+\#*\#
+
+# OS X
+.DS_Store
+
+# Rubymine
+.idea
+
+# Vim
+[._]*.s[a-w][a-z]

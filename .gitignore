@@ -1,2 +1,5 @@
+config/vim/plugged/*
+config/tabtab
+config/configstore
 autoload
 *.swp
