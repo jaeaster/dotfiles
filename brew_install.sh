@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a BREW_PACKAGES=(autojump neovim ripgrep fzf tmux)
+declare -a BREW_PACKAGES=(autojump exa neovim reattach-to-user-namespace ripgrep source-highlight fzf tmux)
 declare -a BREW_CASK_PACKAGEs=(alacritty amethyst karabiner-elements)
 
 brew update

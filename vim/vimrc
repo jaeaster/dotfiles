@@ -55,6 +55,9 @@ nnoremap <Down> :echo "No Down for you!"<CR>
 vnoremap <Down> :<C-u>echo "No Down for you!"<CR>
 inoremap <Down> <C-o>:echo "No Down for you!"<CR>
 
+" Supertab selects with Enter
+" let g:SuperTabCrMapping = 1
+
 " Colorscheme related
 
 if (has("termguicolors"))
