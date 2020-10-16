@@ -34,6 +34,15 @@ Plug 'itchyny/lightline.vim' " Status bar
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 
+" Preview Markdown files in browser with local node server
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
+" Accentuate current line
+Plug 'junegunn/limelight.vim'
+
+" Distraction Free Writing
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 set rtp+=/usr/local/opt/fzf
