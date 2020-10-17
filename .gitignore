@@ -1,5 +1,7 @@
 config/vim/plugged/*
-config/tabtab
+config/gcloud
+config/gatsby
+config/karabiner/automatic_backups
 config/configstore
 autoload
 *.swp
