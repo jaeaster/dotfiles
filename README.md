@@ -18,4 +18,6 @@ Quickly bootstrap any MacOS/Unix system with programmer power tools.
 
 ## Installation
 
-
+```
+$HOME/dotfiles/setup.sh
+```

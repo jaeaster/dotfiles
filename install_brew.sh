@@ -14,5 +14,3 @@ brew tap Homebrew/bundle
 # Install binaries and apps from Homebrew
 brew bundle
 
-# Install fzf keybindings
-$(brew --prefix)/opt/fzf/install
