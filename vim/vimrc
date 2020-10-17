@@ -22,17 +22,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'tpope/vim-commentary' " toggle comments
-Plug 'tpope/vim-endwise' " automatically add end in ruby
-Plug 'tpope/vim-ragtag' " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'itchyny/lightline.vim' " Status bar
+
+" programming language utilities
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " code formatter
+Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-endwise' " automatically add end in ruby
+Plug 'tpope/vim-ragtag' " endings for html, xml, etc. - enhances surround
 
 " Preview Markdown files in browser with local node server
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -117,10 +120,9 @@ set showmatch
 set mat=2
 
 filetype plugin indent on
-autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype python,xml setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype ruby,javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype c,cpp setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-
 " SPLITS
 set splitbelow
 set splitright
