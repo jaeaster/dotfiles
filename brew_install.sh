@@ -1,20 +1,18 @@
 #!/bin/bash
 
-declare -a BREW_PACKAGES=("autojump" "exa" "neovim" "reattach-to-user-namespace" "ripgrep" "source-highlight" "fzf" "tmux")
-declare -a BREW_CASK_PACKAGES=("alacritty" "amethyst" "karabiner-elements")
+# Install or update homebrew
+which -s brew
+if [[ $? != 0 ]] ; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+    brew update
+fi
 
-brew update
-brew upgrade
+# Install `brew bundle` in order to use Brewfiles
+brew tap Homebrew/bundle
 
-for pkg in "${BREW_PACKAGES[@]}"; do
-	echo $pkg
-	brew list $pkg || brew install $pkg
-done
+# Install binaries and apps from Homebrew
+brew bundle
 
-for pkg in "${BREW_CASK_PACKAGES[@]}"; do
-	echo $pkg
-	brew cask list $pkg || brew cask install $pkg
-done
-
-# install fzf keybindings
+# Install fzf keybindings
 $(brew --prefix)/opt/fzf/install
