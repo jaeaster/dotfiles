@@ -29,7 +29,7 @@ ZSH_THEME="robbyrussell"
 # COMPLETION_WAITING_DOTS="true"
 
 # Oh My ZSH plugins
-plugins=(git history-substring-search)
+plugins=(asdf git history-substring-search)
 bindkey "^[[J" history-substring-search-up
 bindkey "^[[N" history-substring-search-down
 source $ZSH/oh-my-zsh.sh

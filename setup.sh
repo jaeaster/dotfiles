@@ -16,4 +16,7 @@ brew bundle
 $(brew --prefix)/opt/fzf/install
 
 # Install asdf plugins
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+echo 'legacy_version_file = yes' >> ~/.asdfrc
+asdf plugin-add ruby
+asdf plugin-add nodejs
+asdf plugin-add python

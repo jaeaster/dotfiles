@@ -17,7 +17,7 @@ Plug 'sheerun/vim-polyglot'
 
 " utilities
 Plug 'scrooloose/nerdtree' " Filesystem explorer
-Plug '/usr/local/opt/fzf' " Fuzzy file finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy file finder
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
