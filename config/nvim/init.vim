@@ -1,3 +1,3 @@
-source ~/.vimrc
+source ~/.vim/vimrc
 
 " Neovim specific stuff here

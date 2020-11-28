@@ -20,3 +20,4 @@ echo 'legacy_version_file = yes' >> ~/.asdfrc
 asdf plugin-add ruby
 asdf plugin-add nodejs
 asdf plugin-add python
+asdf plugin-add deno
