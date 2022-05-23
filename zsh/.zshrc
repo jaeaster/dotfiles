@@ -34,6 +34,9 @@ bindkey "^[[J" history-substring-search-up
 bindkey "^[[N" history-substring-search-down
 source $ZSH/oh-my-zsh.sh
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 set -o vi
 alias ls='exa --oneline --color always --group-directories-first'
 alias ll='exa --all --long --color always --group-directories-first'
