@@ -53,7 +53,7 @@ export PATH=/Users/$(whoami)/.local/bin:$PATH
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # Source asdf
-. $(brew --prefix asdf)/asdf.sh
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
