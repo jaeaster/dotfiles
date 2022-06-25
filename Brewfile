@@ -3,6 +3,7 @@ cask_args appdir: '/Applications'
 
 # Taps
 tap 'homebrew/cask'
+tap 'homebrew/cask-fonts'
 
 # Binaries
 brew 'asdf'
@@ -23,4 +24,7 @@ cask 'amethyst'
 cask 'karabiner-elements'
 cask 'spotify'
 cask 'visual-studio-code'
-cask 'iterm2'
+cask 'alacritty'
+
+# Fonts
+cask 'font-fira-mono'
