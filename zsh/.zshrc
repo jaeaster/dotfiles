@@ -40,8 +40,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 set -o vi
 alias ls='exa --oneline --color always --group-directories-first'
 alias ll='exa --all --long --color always --group-directories-first'
+alias vim='nvim'
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 export PATH=/Users/$(whoami)/.local/bin:$PATH
 

@@ -10,7 +10,7 @@ brew 'asdf'
 # brew 'autojump'
 brew 'exa'
 brew 'fzf'
-brew 'neovim'
+brew 'neovim', args: ['HEAD']
 # brew 'node'
 brew 'reattach-to-user-namespace'
 brew 'ripgrep'
