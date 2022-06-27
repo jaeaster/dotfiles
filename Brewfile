@@ -31,4 +31,4 @@ cask 'visual-studio-code'
 cask 'alacritty'
 
 # Fonts
-cask 'font-fira-mono'
+cask 'font-hack'
