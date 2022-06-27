@@ -20,8 +20,6 @@ brew 'source-highlight'
 brew 'tmux'
 # brew 'yarn'
 brew 'rustup'
-brew 'rust-analyzer'
-brew 'ninja'
 
 # Apps
 cask 'amethyst'
@@ -31,4 +29,4 @@ cask 'visual-studio-code'
 cask 'alacritty'
 
 # Fonts
-cask 'font-hack'
+cask 'font-hack-nerd-font'
