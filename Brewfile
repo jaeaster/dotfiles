@@ -11,6 +11,8 @@ brew 'asdf'
 brew 'exa'
 brew 'fzf'
 brew 'neovim', args: ['HEAD']
+brew 'tree-sitter'
+brew 'fd'
 # brew 'node'
 brew 'reattach-to-user-namespace'
 brew 'ripgrep'
@@ -18,6 +20,8 @@ brew 'source-highlight'
 brew 'tmux'
 # brew 'yarn'
 brew 'rustup'
+brew 'rust-analyzer'
+brew 'ninja'
 
 # Apps
 cask 'amethyst'
