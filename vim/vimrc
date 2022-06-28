@@ -10,12 +10,10 @@ Plug 'scrooloose/nerdtree' " Filesystem explorer
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy file finder
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
-Plug 'Raimondi/delimitMate' " automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-Plug 'itchyny/lightline.vim' " Status bar
 
 " programming language utilities
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " code formatter

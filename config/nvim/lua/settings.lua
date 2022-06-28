@@ -1,3 +1,4 @@
+local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local indent = 4
 
@@ -30,7 +31,7 @@ vim.opt.formatoptions:remove('tc')
 vim.opt.wrap = false
 
 -- Language specific tab settings
-vim.api.nvim_create_autocmd('Filetype', {
+autocmd('Filetype', {
   pattern = {
     'lua',
     'ruby',

@@ -19,6 +19,9 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
+-- Enables more tools of rust-analyzer, like inlay hints
+Plug 'simrat39/rust-tools.nvim'
+
 -- LSP hover docs
 Plug 'glepnir/lspsaga.nvim'
 
@@ -42,4 +45,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 -- Plug 'kristijanhusak/defx-icons'
 -- Plug('Shougo/defx.nvim', { ['do'] = ':UpdateRemotePlugins' })
 
+
+-- automatic closing of quotes, parenthesis, brackets, etc.
+Plug 'Raimondi/delimitMate'
 vim.call('plug#end')

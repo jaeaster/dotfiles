@@ -71,7 +71,7 @@ cmp.setup({
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(nil),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -114,6 +114,16 @@ local capabilities = require('cmp_nvim_lsp')
 
 require('lspsaga').init_lsp_saga {}
 vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+
+local action = require("lspsaga.action")
+
+vim.keymap.set("n", "<C-f>", function()
+  action.smart_scroll_with_saga(1)
+end, { silent = true })
+
+vim.keymap.set("n", "<C-b>", function()
+  action.smart_scroll_with_saga(-1)
+end, { silent = true })
 
 require('nvim-lsp-installer').setup({
   automatic_installation = true,
@@ -160,22 +170,16 @@ require('lspconfig')['tsserver'].setup {
   capabilities = capabilities,
 }
 
-require('lspconfig')['rust_analyzer'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  -- Server-specific settings...
-  settings = {
-    ["rust-analyzer"] = {
-      assist = {
-        importGranularity = "module",
-        importPrefix = "self",
-      },
-      cargo = {
-        loadOutDirsFromCheck = true
-      },
-      procMacro = {
-        enable = true
-      },
+require('rust-tools').setup {
+  server = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      ["rust-analyzer"] = {
+        checkOnSave = {
+          command = "clippy"
+        },
+      }
     }
   }
 }
