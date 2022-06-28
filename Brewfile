@@ -7,7 +7,7 @@ tap 'homebrew/cask-fonts'
 
 # Binaries
 brew 'asdf'
-# brew 'autojump'
+brew 'autojump'
 brew 'exa'
 brew 'fzf'
 brew 'neovim', args: ['HEAD']
@@ -20,6 +20,8 @@ brew 'source-highlight'
 brew 'tmux'
 # brew 'yarn'
 brew 'rustup'
+brew 'starship'
+brew 'zplug'
 
 # Apps
 cask 'amethyst'

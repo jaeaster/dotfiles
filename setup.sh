@@ -19,9 +19,6 @@ brew bundle
 # Install fzf keybindings
 $(brew --prefix)/opt/fzf/install
 
-# Install Oh my zsh
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 # Install asdf plugins
 echo 'legacy_version_file = yes' >> ~/.asdfrc
 asdf plugin-add ruby
