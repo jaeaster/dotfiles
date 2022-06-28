@@ -3,7 +3,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 
 -- Color scheme
-Plug 'joshdick/onedark.vim'
+Plug('catppuccin/nvim', { as = 'catppuccin' })
 
 -- Fuzzy finder
 Plug 'nvim-lua/plenary.nvim'

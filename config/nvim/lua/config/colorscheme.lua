@@ -1,6 +1,6 @@
-local cmd = vim.cmd
+local catppuccin = require("catppuccin")
 
-vim.opt.termguicolors = true
-vim.g.onedark_termcolors = 16
+catppuccin.setup()
 
-cmd('colorscheme onedark')
+vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+vim.cmd [[colorscheme catppuccin]]
