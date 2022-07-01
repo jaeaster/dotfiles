@@ -4,6 +4,10 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Use starship shell prompt
 eval "$(starship init zsh)"
 
+# Case insensitive completion
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 # ZSH plugins
 source /opt/homebrew/opt/zplug/init.zsh
 zplug "plugins/git",   from:oh-my-zsh

@@ -161,10 +161,11 @@ require('lspconfig')['sumneko_lua'].setup {
   },
 }
 
--- require('lspconfig')['pyright'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
--- }
+require('lspconfig')['pyright'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
 require('lspconfig')['tsserver'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
