@@ -19,7 +19,7 @@ end
 local plugGrp = augroup("Source and PlugInstall", { clear = true })
 autocmd("BufWritePost", {
   pattern = 'plugins.lua',
-  command = 'luafile ~/.config/nvim/lua/plugins.lua',
+  command = 'luafile ~/.config/nvim/lua/plugins/plugins.lua',
   group = plugGrp,
 })
 
@@ -30,7 +30,7 @@ autocmd("BufWritePost", {
 })
 
 -- Install plugins
-require('plugins')
+require('plugins.plugins')
 
 -- Setup Lua language server using submodule
 require('lsp')

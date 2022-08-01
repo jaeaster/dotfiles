@@ -10,14 +10,20 @@ Plug 'nvim-lua/plenary.nvim'
 Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 Plug 'nvim-telescope/telescope.nvim'
 
--- LSP and completion
-Plug 'williamboman/nvim-lsp-installer'
+-- LSP
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
+
+-- Completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+
+-- Formatting
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 -- Enables more tools of rust-analyzer, like inlay hints
 Plug 'simrat39/rust-tools.nvim'
@@ -43,11 +49,6 @@ Plug 'tpope/vim-commentary'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
--- Plug 'kristijanhusak/defx-git'
--- Plug 'kristijanhusak/defx-icons'
--- Plug('Shougo/defx.nvim', { ['do'] = ':UpdateRemotePlugins' })
-
-
 -- automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'Raimondi/delimitMate'
 vim.call('plug#end')
@@ -56,5 +57,5 @@ require('plugins.telescope')
 require('plugins.cmp')
 -- require('plugins.lsp_lines')
 require('plugins.lspsaga')
-require('plugins.nvim-lsp-installer')
+require('plugins.mason')
 require('plugins.lualine')

@@ -1,5 +1,4 @@
-require('nvim-lsp-installer').setup({
-  automatic_installation = true,
+require('mason').setup({
   ui = {
     icons = {
       server_installed = "✓",
@@ -7,4 +6,8 @@ require('nvim-lsp-installer').setup({
       server_uninstalled = "✗"
     }
   }
+})
+
+require("mason-lspconfig").setup({
+  automatic_installation = true,
 })
