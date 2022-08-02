@@ -1,66 +1,89 @@
-local Plug = vim.fn['plug#']
+-- Autoinstall Packer if not installed
+local fn = vim.fn
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap =
+    fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+  vim.cmd [[packadd packer.nvim]]
+end
 
-vim.call 'plug#begin'
+return require('packer').startup(function(use)
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
 
--- Color scheme
-Plug('catppuccin/nvim', { as = 'catppuccin' })
-Plug('folke/tokyonight.nvim', { branch = 'main' })
+  local config = function(name)
+    return string.format("require('plugins.%s')", name)
+  end
 
--- Fuzzy finder
-Plug 'nvim-lua/plenary.nvim'
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-Plug 'nvim-telescope/telescope.nvim'
+  local use_with_config = function(path, name)
+    use { path, config = config(name) }
+  end
 
--- LSP
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
+  -- Colorschemes
+  use { 'catppuccin/nvim', as = 'catppuccin' }
+  use 'folke/tokyonight.nvim'
 
--- Completion
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+  -- Treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = config 'treesitter',
+  }
 
--- Formatting and Linters
-Plug 'jose-elias-alvarez/null-ls.nvim'
+  -- Fuzzy Finder
+  use_with_config('nvim-telescope/telescope.nvim', 'telescope')
 
--- Enables more tools of rust-analyzer, like inlay hints
-Plug 'simrat39/rust-tools.nvim'
+  -- LSP
+  use {
+    'williamboman/mason.nvim', -- Install language servers / linters / formatters / etc.
+    'williamboman/mason-lspconfig.nvim', -- Autoinstall above ^^
+    'neovim/nvim-lspconfig', -- makes lsp configuration easier
+  }
 
--- Provide schema rules for json files
-Plug 'b0o/schemastore.nvim'
+  use 'simrat39/rust-tools.nvim' -- Enables more tools of rust-analyzer, like inlay hints
+  use 'folke/lua-dev.nvim' -- better sumneko_lua settings
+  use 'b0o/schemastore.nvim' -- simple access to json-language-server schemae
+  use_with_config('RRethy/vim-illuminate', 'illuminate') -- highlights and allows moving between variable references
 
--- LSP hover docs
-Plug 'glepnir/lspsaga.nvim'
+  -- Diagnostics
+  use_with_config('glepnir/lspsaga.nvim', 'lspsaga') -- LSP hover docs
+  use { -- Better LSP diagnostic lines
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      -- require('lsp_lines').setup()
+    end,
+  }
 
--- Better LSP diagnostic lines
-Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+  -- Formatting and Linters
+  use 'jose-elias-alvarez/null-ls.nvim'
 
--- Snippet engine
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+  -- Completion
+  use {
+    'hrsh7th/nvim-cmp', -- completion
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+    },
+    config = config 'cmp',
+  }
 
--- Fugitive for Git
-Plug 'tpope/vim-fugitive'
--- Toggle comments
-Plug 'tpope/vim-commentary'
+  -- Status bar
+  use_with_config('nvim-lualine/lualine.nvim', 'lualine')
+  use 'kyazdani42/nvim-web-devicons' -- icons
 
--- Status bar
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+  -- Basic editor functionality
+  use 'tpope/vim-fugitive' -- Fugitive for Git
+  use 'tpope/vim-commentary' -- Toggle comments
+  use 'Raimondi/delimitMate' -- automatic closing of quotes, parenthesis, brackets, etc.
 
--- Highlight symbols
-Plug 'RRethy/vim-illuminate'
+  -- Misc
+  use 'nvim-lua/plenary.nvim'
 
--- automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'Raimondi/delimitMate'
-vim.call 'plug#end'
-
-require 'plugins.telescope'
-require 'plugins.cmp'
--- require('plugins.lsp_lines')
-require 'plugins.lspsaga'
-require 'plugins.mason'
-require 'plugins.lualine'
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)

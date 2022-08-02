@@ -1,4 +1,5 @@
 config/vim/plugged/*
+config/nvim/plugin/packer_compiled.lua
 config/gcloud
 config/gatsby
 config/karabiner/automatic_backups
