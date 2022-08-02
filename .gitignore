@@ -4,5 +4,9 @@ config/gcloud
 config/gatsby
 config/karabiner/automatic_backups
 config/configstore
+config/yarn
+config/exercism
 autoload
+
+Brewfile.lock.json
 *.swp
