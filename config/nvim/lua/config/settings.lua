@@ -27,8 +27,12 @@ vim.opt.showmatch = true
 vim.opt.incsearch = true
 vim.opt.showcmd = true
 vim.opt.title = true
-vim.opt.formatoptions:remove('tc')
+vim.opt.formatoptions:remove 'tc'
 vim.opt.wrap = false
+vim.opt.cursorline = true
+
+-- Delay for illuminate plugin
+vim.g.Illuminate_delay = 300
 
 -- Language specific tab settings
 autocmd('Filetype', {
@@ -38,15 +42,15 @@ autocmd('Filetype', {
     'javascript',
     'javascriptreact',
     'typescript',
-    'typescriptreact'
+    'typescriptreact',
   },
-  command = 'setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2'
+  command = 'setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2',
 })
 
 -- Highlight on yank
-local yankGrp = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  command = "silent! lua vim.highlight.on_yank()",
+local yankGrp = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  command = 'silent! lua vim.highlight.on_yank()',
   group = yankGrp,
 })
 
