@@ -1,3 +1,3 @@
-require('config.settings')
-require('config.keymappings')
-require('config.colorscheme')
+require 'config.options'
+require 'config.keymappings'
+require 'config.colorscheme'
