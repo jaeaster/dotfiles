@@ -116,6 +116,9 @@ return packer.startup(function(use)
   use_with_config('nvim-lualine/lualine.nvim', 'lualine')
   use 'kyazdani42/nvim-web-devicons' -- icons
 
+  -- File explorer
+  use_with_config('kyazdani42/nvim-tree.lua', 'nvim-tree')
+
   -- Basic editor functionality
   use 'tpope/vim-fugitive' -- Fugitive for Git
   use_with_config('numToStr/Comment.nvim', 'comment') -- Toggle comments

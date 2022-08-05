@@ -21,7 +21,11 @@ keymap('n', '<C-j>', '<C-w>j', opts)
 keymap('n', '<C-k>', '<C-w>k', opts)
 keymap('n', '<C-l>', '<C-w>l', opts)
 
-keymap('n', '<leader>e', ':Lex 30<cr>', opts)
+-- Toggle File explorer
+keymap('n', '<leader>e', ':NvimTreeToggle<cr>', opts)
+
+-- Save and close neovim
+-- keymap('n', '<leader>c', ':wq<CR>', opts)
 
 -- Create Splits
 keymap('n', '<leader>v', ':vsp<CR>', opts)
