@@ -106,6 +106,8 @@ return packer.startup(function(use)
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lua',
+      'onsails/lspkind-nvim', -- icons in completion menu
     },
     config = config 'cmp',
   }

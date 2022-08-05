@@ -22,6 +22,7 @@ brew 'tmux'
 brew 'rustup'
 brew 'starship'
 brew 'zplug'
+brew 'gh'
 
 # Apps
 cask 'amethyst'

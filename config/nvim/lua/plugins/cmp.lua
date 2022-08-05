@@ -4,6 +4,13 @@ if not cmp_status_ok then
   return
 end
 
+local ok, lspkind = pcall(require, 'lspkind')
+if not ok then
+  return
+end
+
+lspkind.init()
+
 local snip_status_ok, luasnip = pcall(require, 'luasnip')
 if not snip_status_ok then
   return
@@ -61,23 +68,29 @@ cmp.setup {
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm { select = false }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
+    { name = 'gh_issues' },
+    { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-  }, {
-    { name = 'buffer' },
-  }),
-}
+    { name = 'buffer', keyword_length = 5 },
+  },
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-    { name = 'buffer' },
-  }),
-})
+  formatting = {
+    format = lspkind.cmp_format {
+      with_text = true,
+      menu = {
+        buffer = '[buf]',
+        nvim_lsp = '[LSP]',
+        nvim_lua = '[api]',
+        path = '[path]',
+        luasnip = '[snip]',
+        gh_issues = '[issues]',
+      },
+    },
+  },
+}
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
