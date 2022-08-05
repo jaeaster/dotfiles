@@ -118,7 +118,8 @@ return packer.startup(function(use)
 
   -- Basic editor functionality
   use 'tpope/vim-fugitive' -- Fugitive for Git
-  use 'tpope/vim-commentary' -- Toggle comments
+  use_with_config('numToStr/Comment.nvim', 'comment') -- Toggle comments
+  use_with_config('windwp/nvim-autopairs', 'autopairs')
   use 'Raimondi/delimitMate' -- automatic closing of quotes, parenthesis, brackets, etc.
 
   -- Misc
