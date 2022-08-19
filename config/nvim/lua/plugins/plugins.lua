@@ -123,7 +123,12 @@ return packer.startup(function(use)
   use 'tpope/vim-fugitive' -- Fugitive for Git
   use_with_config('numToStr/Comment.nvim', 'comment') -- Toggle comments
   use_with_config('windwp/nvim-autopairs', 'autopairs')
-  use 'Raimondi/delimitMate' -- automatic closing of quotes, parenthesis, brackets, etc.
+  use {
+    'windwp/nvim-ts-autotag',
+    config = function()
+      require('nvim-ts-autotag').setup {}
+    end,
+  }
 
   -- Misc
   use 'nvim-lua/plenary.nvim'
