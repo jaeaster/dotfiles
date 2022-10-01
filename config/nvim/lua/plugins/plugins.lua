@@ -30,7 +30,6 @@ local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
   return
 end
-
 -- Have packer use a popup window
 packer.init {
   display = {
@@ -52,6 +51,8 @@ return packer.startup(function(use)
   local use_with_config = function(path, name)
     use { path, config = config(name) }
   end
+
+  use_with_config('github/copilot.vim', 'copilot')
 
   -- Colorschemes
   use { 'catppuccin/nvim', as = 'catppuccin' }
