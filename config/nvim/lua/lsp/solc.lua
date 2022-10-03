@@ -24,27 +24,35 @@ local function get_remappings(file)
 end
 
 M.setup = function(on_attach, capabilities)
-  require('lspconfig')['solc'].setup {
-    on_init = function(client)
-      local project_root = client.workspace_folders[1].name
-      local lib_path = project_root .. '/lib'
-      local node_modules_path = project_root .. '/node_modules'
-      local remappings_path = project_root .. '/remappings.txt'
-      local remappings = get_remappings(remappings_path)
+  -- require('lspconfig')['solc'].setup { -- Official solc lsp
+  --   on_init = function(client)
+  --     local project_root = client.workspace_folders[1].name
+  --     local lib_path = project_root .. '/lib'
+  --     local node_modules_path = project_root .. '/node_modules'
+  --     local remappings_path = project_root .. '/remappings.txt'
+  --     local remappings = get_remappings(remappings_path)
+  --
+  --     client.config.settings['include-paths'] = { lib_path, node_modules_path }
+  --     -- client.config.settings['remappings'] = remappings
+  --
+  --     client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
+  --     return true
+  --   end,
+  --   settings = {
+  --     ['include-paths'] = {},
+  --     ['remappings'] = {},
+  --   },
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- }
 
-      client.config.settings['include-paths'] = { lib_path, node_modules_path }
-      client.config.settings['remappings'] = remappings
-
-      client.notify('workspace/didChangeConfiguration', { settings = client.config.settings })
-      return true
-    end,
-    settings = {
-      ['include-paths'] = {},
-      ['remappings'] = {},
-    },
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  require('lspconfig')['solidity'].setup {} -- https://github.com/qiuxiang/solidity-ls
+  --
+  -- require('lspconfig')['solidity_ls'].setup { -- https://github.com/juanfranblanco/vscode-solidity
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- }
+  --
 end
 
 return M
