@@ -40,10 +40,34 @@ local on_attach = function(client, bufnr)
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format {
+          filter = function(client)
+            local filetype = vim.bo.filetype
+            -- Only use null-ls + rome for js/ts formatting
+            if filetype == 'javascript' or filetype == 'typescript' then
+              if client.name == 'null-ls' then
+                return true
+              else
+                return false
+              end
+            end
+            -- Disable solidity language server formatting in favor of null-ls
+            if client.name == 'solidity' then
+              return false
+            else
+              return true
+            end
+          end,
           bufnr = bufnr,
         }
       end,
     })
+  end
+
+  if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
+    vim.diagnostic.disable(bufnr)
+    vim.defer_fn(function()
+      vim.diagnostic.reset(nil, bufnr)
+    end, 1000)
   end
 
   require('illuminate').on_attach(client)
@@ -51,7 +75,7 @@ end
 
 -- init language servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 for _, server in ipairs {
   'pyright',
@@ -62,6 +86,8 @@ for _, server in ipairs {
   'solc',
   'jsonls',
   'null-ls',
+  'jdtls',
+  'biome',
 } do
   require('lsp.' .. server).setup(on_attach, capabilities)
 end

@@ -52,7 +52,7 @@ return packer.startup(function(use)
     use { path, config = config(name) }
   end
 
-  use_with_config('github/copilot.vim', 'copilot')
+  -- use_with_config('github/copilot.vim', 'copilot')
 
   -- Colorschemes
   use { 'catppuccin/nvim', as = 'catppuccin' }
@@ -77,6 +77,9 @@ return packer.startup(function(use)
 
   use 'simrat39/rust-tools.nvim' -- Enables more tools of rust-analyzer, like inlay hints
   use 'folke/lua-dev.nvim' -- better sumneko_lua settings
+
+  -- use { 'mfussenegger/nvim-jdtls' } -- Java LSP
+  --
   use 'b0o/schemastore.nvim' -- simple access to json-language-server schemae
   use_with_config('RRethy/vim-illuminate', 'illuminate') -- highlights and allows moving between variable references
 
@@ -130,6 +133,9 @@ return packer.startup(function(use)
       require('nvim-ts-autotag').setup {}
     end,
   }
+
+  -- Helm charts
+  use 'towolf/vim-helm'
 
   -- Misc
   use 'nvim-lua/plenary.nvim'

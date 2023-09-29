@@ -1,7 +1,7 @@
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  require('lspconfig')['sumneko_lua'].setup {
+  require('lspconfig')['lua_ls'].setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
@@ -16,7 +16,7 @@ M.setup = function(on_attach, capabilities)
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = vim.api.nvim_get_runtime_file('', true),
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {

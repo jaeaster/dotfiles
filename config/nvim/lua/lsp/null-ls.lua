@@ -17,14 +17,16 @@ local forgefmt = {
 }
 
 local sources = {
-  b.code_actions.eslint_d,
-
-  b.formatting.eslint_d,
+  -- b.code_actions.eslint_d,
+  -- b.formatting.eslint_d,
+  b.formatting.rome.with { command = 'biome' },
+  b.formatting.rustywind.with { extra_args = { '--config-file', 'rustywind.json' } },
   b.formatting.stylua,
   -- b.formatting.prettier.with { extra_args = { '--single-quote' } },
   forgefmt,
+  b.formatting.google_java_format,
 
-  b.diagnostics.eslint_d,
+  -- b.diagnostics.eslint_d,
   b.diagnostics.solhint,
 
   b.completion.spell,
