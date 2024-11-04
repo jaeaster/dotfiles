@@ -46,13 +46,20 @@ M.setup = function(on_attach, capabilities)
   --   capabilities = capabilities,
   -- }
 
-  require('lspconfig')['solidity'].setup {} -- https://github.com/qiuxiang/solidity-ls
+  require('lspconfig')['solidity'].setup { -- https://github.com/qiuxiang/solidity-ls
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
   --
   -- require('lspconfig')['solidity_ls'].setup { -- https://github.com/juanfranblanco/vscode-solidity
   --   on_attach = on_attach,
   --   capabilities = capabilities,
   -- }
   --
+  -- require('lspconfig')['solidity_ls_nomicfoundation'].setup { -- https://github.com/NomicFoundation/hardhat-vscode/blob/development/server/README.md
+  --   on_attach = on_attach,
+  --   capabilities = capabilities,
+  -- }
 end
 
 return M
