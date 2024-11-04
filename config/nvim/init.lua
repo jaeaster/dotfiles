@@ -1,6 +1,5 @@
 -- Install plugins
-require 'plugins.plugins'
-require 'plugins.mason'
+require 'plugins'
 
 -- Setup Lua language server using submodule
 require 'lsp'
