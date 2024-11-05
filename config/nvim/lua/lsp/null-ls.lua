@@ -12,6 +12,10 @@ local forgefmt = {
     command = 'forge',
     args = { 'fmt', '--raw', '-' },
     to_stdin = true,
+    runtime_condition = function()
+      -- Only run forge fmt if we're in a Foundry project
+      return vim.fn.filereadable 'foundry.toml' == 1 or vim.fn.filereadable 'forge.toml' == 1
+    end,
   },
 }
 

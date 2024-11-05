@@ -4,9 +4,9 @@ local M = {}
 -- LSP UI customization
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
-  { name = 'DiagnosticSignWarn', text = '' },
-  { name = 'DiagnosticSignHint', text = '' },
-  { name = 'DiagnosticSignInfo', text = '' },
+  { name = 'DiagnosticSignWarn',  text = '' },
+  { name = 'DiagnosticSignHint',  text = '' },
+  { name = 'DiagnosticSignInfo',  text = '' },
 }
 
 for _, sign in ipairs(signs) do
@@ -16,7 +16,7 @@ end
 local config = {
   virtual_text = false, -- disable virtual text
   signs = {
-    active = signs, -- show signs
+    active = signs,     -- show signs
   },
   update_in_insert = true,
   underline = true,
@@ -80,15 +80,15 @@ M.on_attach = function(client, bufnr)
             -- Use none-ls for formatting in JavaScript/TypeScript
             local filetype = vim.bo.filetype
             if
-              filetype == 'javascript'
-              or filetype == 'typescript'
-              or filetype == 'typescriptreact'
-              or filetype == 'javascriptreact'
+                filetype == 'javascript'
+                or filetype == 'typescript'
+                or filetype == 'typescriptreact'
+                or filetype == 'javascriptreact'
             then
               return client.name == 'null-ls'
             end
             -- Disable formatting for certain servers
-            return client.name ~= 'tsserver' and client.name ~= 'solidity'
+            return client.name ~= 'ts_ls' and client.name ~= 'solidity_ls_nomicfoundation'
           end,
           bufnr = bufnr,
         }
@@ -107,9 +107,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 M.capabilities = capabilities
 
--- Setup mason-lspconfig
-local mason_lspconfig = require 'mason-lspconfig'
-
 -- Enable the following language servers
 local servers = {
   'pyright',
@@ -122,11 +119,19 @@ local servers = {
   'yamlls',
   'terraformls',
   'jdtls',
+  'solidity_ls_nomicfoundation',
 }
--- 'null-ls',
+
+-- Setup mason-lspconfig
+local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup {
   ensure_installed = servers,
+}
+
+-- Settings that can be overridden by server-specific settings
+local default_settings = {
+  -- Add any default settings you want all LSPs to have
 }
 
 -- Setup each server
@@ -135,22 +140,21 @@ mason_lspconfig.setup_handlers {
     local opts = {
       on_attach = M.on_attach,
       capabilities = M.capabilities,
+      flags = {
+        debounce_text_changes = 150,
+      },
     }
 
-    -- Add server-specific settings here
-    if server_name == 'lua_ls' then
-      opts.settings = require 'lsp.lua_ls'
-    end
+    -- Try to load server-specific configuration
+    local has_server_config, server_config = pcall(require, 'lsp.' .. server_name)
 
-    if server_name == 'jsonls' then
-      opts.settings = require 'lsp.jsonls'
+    if has_server_config then
+      -- If server has a custom setup function, use it
+      server_config.setup(opts.on_attach, opts.capabilities)
+    else
+      -- Otherwise, use the default setup
+      require('lspconfig')[server_name].setup(opts)
     end
-
-    if server_name == 'yamlls' then
-      opts.settings = require 'lsp.yamlls'
-    end
-
-    require('lspconfig')[server_name].setup(opts)
   end,
 }
 

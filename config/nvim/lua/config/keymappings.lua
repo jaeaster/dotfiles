@@ -5,6 +5,7 @@ local keymap = vim.api.nvim_set_keymap
 -- Remap space as leader key
 keymap('', '<Space>', '<Nop>', opts)
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Better window navigation
 keymap('n', '<C-h>', '<C-w>h', opts)
@@ -38,6 +39,14 @@ vim.keymap.set('n', '<leader>h', builtin.help_tags, { desc = 'Telescope help tag
 
 -- LSP Saga
 vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
+
+-- Avante
+vim.keymap.set({ 'n', 'v' }, '<leader>aa', ':AvanteAsk<CR>', opts)
+vim.keymap.set('v', '<leader>ae', function()
+  require('avante.api').edit()
+end, opts)
+vim.keymap.set('n', '<leader>ar', ':AvanteRefresh<CR>', opts)
+vim.keymap.set('n', '<leader>af', ':AvanteFocus<CR>', opts)
 
 -- LSP mappings
 local bufopts = { noremap = true, silent = true }
