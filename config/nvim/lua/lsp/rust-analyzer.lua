@@ -6,13 +6,16 @@ M.setup = function(on_attach, capabilities)
       on_attach = on_attach,
       capabilities = capabilities,
       settings = {
-        ["rust-analyzer"] = {
+        ['rust-analyzer'] = {
           checkOnSave = {
-            command = "clippy"
+            command = 'clippy',
           },
-        }
-      }
-    }
+          server = {
+            standalone = false,
+          },
+        },
+      },
+    },
   }
 end
 

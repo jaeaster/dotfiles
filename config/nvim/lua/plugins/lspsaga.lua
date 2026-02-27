@@ -1,4 +1,4 @@
-require('lspsaga').init_lsp_saga {}
+require('lspsaga').setup {}
 vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<CR>', { silent = true })
 
 -- local action = require 'lspsaga.action'
