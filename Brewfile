@@ -1,24 +1,20 @@
 # Install Casks to /Applications
 cask_args appdir: '/Applications'
 
-# Taps
-tap 'homebrew/cask'
-tap 'homebrew/cask-fonts'
-
 # Binaries
 brew 'asdf'
 brew 'autojump'
-brew 'exa'
+brew 'eza'
 brew 'fzf'
 brew 'neovim', args: ['HEAD']
 brew 'tree-sitter'
 brew 'fd'
-# brew 'node'
-brew 'reattach-to-user-namespace'
+brew 'git-lfs'
+brew 'jq'
 brew 'ripgrep'
 brew 'source-highlight'
 brew 'tmux'
-# brew 'yarn'
+brew 'tree'
 brew 'rustup'
 brew 'starship'
 brew 'zplug'
@@ -26,10 +22,10 @@ brew 'gh'
 
 # Apps
 cask 'amethyst'
+cask 'ghostty'
 cask 'karabiner-elements'
 cask 'spotify'
 cask 'visual-studio-code'
-cask 'alacritty'
 
 # Fonts
 cask 'font-hack-nerd-font'
