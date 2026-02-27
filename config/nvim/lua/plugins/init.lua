@@ -172,6 +172,25 @@ require('lazy').setup {
       end,
     },
 
+    -- Render Markdown
+    {
+      'iamcco/markdown-preview.nvim',
+      cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+      build = 'cd app && npm install',
+      init = function()
+        vim.g.mkdp_filetypes = { 'markdown' }
+      end,
+      ft = { 'markdown' },
+    },
+    {
+      -- Make sure to set this up properly if you have lazy=true
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter' },
+      ---@module 'render-markdown'
+      ---@type render.md.UserConfig
+      opts = {},
+    },
+
     -- Additional functionality
     { 'towolf/vim-helm' },
 
@@ -179,6 +198,7 @@ require('lazy').setup {
     {
       'zbirenbaum/copilot.lua',
       cmd = 'Copilot',
+      enabled = false,
       event = 'InsertEnter',
       config = function()
         require('copilot').setup {}
@@ -188,6 +208,7 @@ require('lazy').setup {
     {
       'CopilotC-Nvim/CopilotChat.nvim',
       branch = 'canary',
+      enabled = false,
       dependencies = {
         { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
         { 'nvim-lua/plenary.nvim' },  -- for curl, log wrapper
@@ -203,6 +224,7 @@ require('lazy').setup {
     {
       'yetone/avante.nvim',
       event = 'VeryLazy',
+      enabled = false,
       lazy = false,
       version = false, -- set this if you want to always pull the latest change
       opts = {

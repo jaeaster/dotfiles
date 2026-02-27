@@ -115,6 +115,7 @@ local servers = {
   'tailwindcss',
   'rust_analyzer',
   'biome',
+  'ruff',
   'jsonls',
   'yamlls',
   'terraformls',
