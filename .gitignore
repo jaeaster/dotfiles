@@ -10,3 +10,17 @@ autoload
 
 Brewfile.lock.json
 *.swp
+
+# OS
+.DS_Store
+
+# Auto-generated
+config/.luarc.json
+config/simple-update-notifier
+config/uv
+
+# Secrets/credentials
+config/auth0
+config/argocd
+config/gh/hosts.yml
+config/github-copilot
