@@ -96,7 +96,6 @@ local servers = {
   'lua_ls',
   'ts_ls',
   'tailwindcss',
-  'rust_analyzer',
   'biome',
   'ruff',
   'jsonls',
@@ -121,6 +120,17 @@ end
 
 -- Enable all servers
 vim.lsp.enable(servers)
+
+-- Rustaceanvim (manages rust-analyzer itself)
+vim.g.rustaceanvim = {
+  server = {
+    default_settings = {
+      ['rust-analyzer'] = {
+        check = { command = 'clippy' },
+      },
+    },
+  },
+}
 
 -- Suppress irrelevant messages
 local notify = vim.notify

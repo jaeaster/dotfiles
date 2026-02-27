@@ -64,6 +64,7 @@ require('lazy').setup {
       end,
     },
     { 'b0o/schemastore.nvim' },
+    { 'mrcjkb/rustaceanvim', version = '^8', lazy = false },
     {
       'nvimdev/lspsaga.nvim',
       config = function()
