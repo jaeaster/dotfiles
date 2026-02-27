@@ -2,22 +2,24 @@
 
 ## Purpose
 
-Quickly bootstrap any MacOS/Unix system with programmer power tools.
+Quickly bootstrap any macOS system with programmer power tools.
 
 ### What you get
 
-	* Teleport around the file system with autojump | `j somewhere_in_the_filesystem_far_far_away`
-	* Modern file editing with neovim | `nvim set_symlinks.sh`
-	* Super-fast filesystem search with ripgrep | `rg 'easterman' ./user_accounts`
-	* Fuzzy file search from the terminal and from vim | `press CTRL-t` OR `:Files` in vim
-	* Terminal multiplexing with tmux | `tmux new`
-
-	* Alacritty | Super-fast GPU-accelerated terminal written in rust
-	* Amethyst | Tiling window manager
-	* Karabiner | Keyboard mapper | maps Caps Lock to ESC (quick press) and CTRL (long press)
+- Teleport around the file system with autojump | `j somewhere_far_away`
+- Modern file editing with neovim | `nvim somefile.sh`
+- Super-fast filesystem search with ripgrep | `rg 'pattern' ./dir`
+- Fuzzy file search from the terminal | `CTRL-t`
+- Terminal multiplexing with tmux | `tmux new`
+- Ghostty | Fast, native terminal
+- Starship | Cross-shell prompt
+- Amethyst | Tiling window manager
+- Karabiner | Caps Lock → ESC (tap) / CTRL (hold)
 
 ## Installation
 
 ```
-$HOME/dotfiles/setup.sh
+git clone git@github.com:jaeaster/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./setup.sh
 ```

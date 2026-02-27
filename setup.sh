@@ -16,9 +16,6 @@ defaults write -g KeyRepeat -int 1
 # Install homebrew packages
 brew bundle
 
-# Install fzf keybindings
-$(brew --prefix)/opt/fzf/install
-
 # Install asdf plugins
 echo 'legacy_version_file = yes' >> ~/.asdfrc
 asdf plugin-add ruby

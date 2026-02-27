@@ -8,9 +8,4 @@ else
     brew update
 fi
 
-# Install `brew bundle` in order to use Brewfiles
-brew tap Homebrew/bundle
-
-# Install binaries and apps from Homebrew
-brew bundle
 

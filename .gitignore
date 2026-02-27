@@ -1,5 +1,3 @@
-config/vim/plugged/*
-config/nvim/plugin/packer_compiled.lua
 config/gcloud
 config/gatsby
 config/karabiner/automatic_backups
@@ -13,6 +11,10 @@ Brewfile.lock.json
 
 # OS
 .DS_Store
+
+# Legacy (deleted but may exist locally)
+config/vim
+config/nvim/plugin/packer_compiled.lua
 
 # Auto-generated
 config/.luarc.json
