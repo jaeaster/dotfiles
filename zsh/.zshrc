@@ -47,7 +47,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
 # Source asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
-. $(brew --prefix asdf)/asdf.sh
 
 # Source autojump (a.k.a. `j`)
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
@@ -57,5 +56,23 @@ LESSPIPE=`which src-hilite-lesspipe.sh`
 export LESSOPEN="| ${LESSPIPE} %s"
 export LESS=' -R -X -F '
 
-export PATH="$PATH:/Users/jonathaneasterman/.foundry/bin"
-export PATH="$PATH:/Users/jonathaneasterman/.gcloud/google-cloud-sdk/bin"
+export PATH="$PATH:${HOME}/.foundry/bin"
+export PATH="$PATH:${HOME}/.gcloud/google-cloud-sdk/bin"
+
+# pnpm
+export PNPM_HOME="${HOME}/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+alias pn=pnpm
+alias tf=terraform
+# pnpm end
+
+# bun completions
+[ -s "${HOME}/.bun/_bun" ] && source "${HOME}/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"
