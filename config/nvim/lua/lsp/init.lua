@@ -1,7 +1,4 @@
--- lua/lsp/init.lua
-local M = {}
-
--- LSP UI customization
+-- Diagnostic signs
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
   { name = 'DiagnosticSignWarn',  text = '' },
@@ -13,11 +10,9 @@ for _, sign in ipairs(signs) do
   vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
 end
 
-local config = {
-  virtual_text = false, -- disable virtual text
-  signs = {
-    active = signs,     -- show signs
-  },
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = { active = signs },
   update_in_insert = true,
   underline = true,
   severity_sort = true,
@@ -31,79 +26,71 @@ local config = {
   },
 }
 
-vim.diagnostic.config(config)
-
--- Show line diagnostics automatically in hover window
+-- Show diagnostics on hover
 vim.o.updatetime = 250
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus = false })]]
-
--- Hover configuration
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = 'rounded',
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
 })
 
--- Signature help configuration
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = 'rounded',
+-- LspAttach autocmd (replaces on_attach)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufnr = args.buf
+
+    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Document highlight
+    if client and client.server_capabilities.documentHighlightProvider then
+      local group = vim.api.nvim_create_augroup('lsp_document_highlight_' .. bufnr, { clear = true })
+      vim.api.nvim_create_autocmd('CursorHold', {
+        group = group, buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd('CursorMoved', {
+        group = group, buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+
+    -- Format on save
+    if client and client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('LspFormat.' .. bufnr, {}),
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format {
+            filter = function(c)
+              local filetype = vim.bo.filetype
+              if filetype == 'javascript' or filetype == 'typescript'
+                  or filetype == 'typescriptreact' or filetype == 'javascriptreact' then
+                return c.name == 'null-ls'
+              end
+              return c.name ~= 'ts_ls' and c.name ~= 'solidity_ls_nomicfoundation'
+            end,
+            bufnr = bufnr,
+          }
+        end,
+      })
+    end
+
+    -- Illuminate
+    require('illuminate').on_attach(client)
+  end,
 })
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-  -- Highlighting references
-  -- See `:help CursorHold` for information about when this is executed
-  if client.server_capabilities.documentHighlightProvider then
-    vim.cmd [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]]
-  end
-
-  -- Format on save
-  if client.server_capabilities.documentFormattingProvider then
-    vim.api.nvim_create_autocmd('BufWritePre', {
-      group = vim.api.nvim_create_augroup('LspFormat.' .. bufnr, {}),
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format {
-          filter = function(client)
-            -- Use none-ls for formatting in JavaScript/TypeScript
-            local filetype = vim.bo.filetype
-            if
-                filetype == 'javascript'
-                or filetype == 'typescript'
-                or filetype == 'typescriptreact'
-                or filetype == 'javascriptreact'
-            then
-              return client.name == 'null-ls'
-            end
-            -- Disable formatting for certain servers
-            return client.name ~= 'ts_ls' and client.name ~= 'solidity_ls_nomicfoundation'
-          end,
-          bufnr = bufnr,
-        }
-      end,
-    })
-  end
-
-  -- Illuminate setup
-  require('illuminate').on_attach(client)
-end
-
--- Add additional capabilities supported by nvim-cmp
+-- Capabilities (shared across all servers)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-M.capabilities = capabilities
+vim.lsp.config('*', {
+  capabilities = capabilities,
+})
 
--- Enable the following language servers
+-- Servers to install and enable
 local servers = {
   'pyright',
   'lua_ls',
@@ -118,41 +105,22 @@ local servers = {
   'solidity_ls_nomicfoundation',
 }
 
--- Setup mason-lspconfig
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
+-- Ensure servers are installed
+require('mason-lspconfig').setup {
   ensure_installed = servers,
+  automatic_enable = false,
 }
 
--- Settings that can be overridden by server-specific settings
-local default_settings = {
-  -- Add any default settings you want all LSPs to have
-}
+-- Load per-server configs
+for _, server in ipairs(servers) do
+  local ok, server_config = pcall(require, 'lsp.' .. server)
+  if ok then
+    vim.lsp.config(server, server_config)
+  end
+end
 
--- Setup each server
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    local opts = {
-      on_attach = M.on_attach,
-      capabilities = M.capabilities,
-      flags = {
-        debounce_text_changes = 150,
-      },
-    }
-
-    -- Try to load server-specific configuration
-    local has_server_config, server_config = pcall(require, 'lsp.' .. server_name)
-
-    if has_server_config then
-      -- If server has a custom setup function, use it
-      server_config.setup(opts.on_attach, opts.capabilities)
-    else
-      -- Otherwise, use the default setup
-      require('lspconfig')[server_name].setup(opts)
-    end
-  end,
-}
+-- Enable all servers
+vim.lsp.enable(servers)
 
 -- Suppress irrelevant messages
 local notify = vim.notify
@@ -165,5 +133,3 @@ vim.notify = function(msg, ...)
   end
   notify(msg, ...)
 end
-
-return M

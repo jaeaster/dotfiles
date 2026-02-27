@@ -55,23 +55,7 @@ require('lazy').setup {
         }
       end,
     },
-    {
-      'williamboman/mason-lspconfig.nvim',
-      config = function()
-        require('mason-lspconfig').setup {
-          automatic_installation = true,
-        }
-      end,
-      dependencies = { 'williamboman/mason.nvim' },
-    },
-    {
-      'neovim/nvim-lspconfig',
-      dependencies = {
-        'williamboman/mason.nvim',
-        'williamboman/mason-lspconfig.nvim',
-        'folke/neodev.nvim', -- Replaces lua-dev.nvim
-      },
-    },
+    { 'williamboman/mason-lspconfig.nvim', dependencies = { 'williamboman/mason.nvim' } },
     {
       'nvimtools/none-ls.nvim',
       dependencies = { 'nvim-lua/plenary.nvim' },
@@ -79,7 +63,6 @@ require('lazy').setup {
         require 'lsp.null-ls'
       end,
     },
-    { 'simrat39/rust-tools.nvim' },
     { 'b0o/schemastore.nvim' },
     {
       'nvimdev/lspsaga.nvim',

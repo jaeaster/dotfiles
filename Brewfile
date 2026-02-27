@@ -6,7 +6,7 @@ brew 'asdf'
 brew 'autojump'
 brew 'eza'
 brew 'fzf'
-brew 'neovim', args: ['HEAD']
+brew 'neovim'
 brew 'tree-sitter'
 brew 'fd'
 brew 'git-lfs'
