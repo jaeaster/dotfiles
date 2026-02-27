@@ -88,6 +88,8 @@ for _, server in ipairs {
   'null-ls',
   'jdtls',
   'biome',
+  'yamlls',
+  'terraformls',
 } do
   require('lsp.' .. server).setup(on_attach, capabilities)
 end
