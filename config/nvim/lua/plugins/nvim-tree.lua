@@ -17,6 +17,9 @@ local function on_attach(bufnr)
 end
 
 require('nvim-tree').setup {
+  diagnostics = { enable = true, show_on_dirs = true },
+  update_focused_file = { enable = true },
+
   disable_netrw = true,
   hijack_netrw = true,
   respect_buf_cwd = true,
