@@ -50,12 +50,8 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 M.on_attach = function(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
-
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
   -- Highlighting references
   -- See `:help CursorHold` for information about when this is executed
@@ -119,7 +115,6 @@ local servers = {
   'jsonls',
   'yamlls',
   'terraformls',
-  'jdtls',
   'solidity_ls_nomicfoundation',
 }
 
