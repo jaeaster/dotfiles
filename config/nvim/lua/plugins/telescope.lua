@@ -1,5 +1,42 @@
--- Telescope: Search files, search text, search buffers, help
-vim.keymap.set('n', '<leader>f', ':lua require("telescope.builtin").find_files()<cr>')
-vim.keymap.set('n', '<leader>g', ':lua require("telescope.builtin").live_grep()<cr>')
-vim.keymap.set('n', '<leader>b', ':lua require("telescope.builtin").buffers()<cr>')
-vim.keymap.set('n', '<leader>h', ':lua require("telescope.builtin").help_tags()<cr>')
+local telescope = require 'telescope'
+local actions = require 'telescope.actions'
+
+telescope.setup {
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-j>'] = actions.move_selection_next,
+        ['<C-k>'] = actions.move_selection_previous,
+        ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
+        ['<esc>'] = actions.close,
+      },
+    },
+    file_ignore_patterns = {
+      'node_modules',
+      '.git/',
+      '.cache',
+      '%.o',
+      '%.a',
+      '%.out',
+      '%.class',
+      '%.pdf',
+      '%.mkv',
+      '%.mp4',
+      '%.zip',
+    },
+  },
+  pickers = {
+    find_files = {
+      theme = 'dropdown',
+      previewer = true,
+      hidden = true,
+    },
+    live_grep = {
+      theme = 'dropdown',
+    },
+    buffers = {
+      theme = 'dropdown',
+      previewer = false,
+    },
+  },
+}
