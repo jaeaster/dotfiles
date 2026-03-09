@@ -64,3 +64,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Highlight Git Merge Conflicts
 cmd [[match ErrorMsg "^\(<\|=\|>\)\{7\}\([^=].\+\)\?$"]]
+
+-- Use OSC 52 for clipboard when connected over SSH so yanks sync
+-- back to the host machine's clipboard through the terminal.
+-- Locally, Neovim uses pbcopy/pbpaste via the default unnamedplus provider.
+if os.getenv 'SSH_TTY' then
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+      ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste '+',
+      ['*'] = require('vim.ui.clipboard.osc52').paste '*',
+    },
+  }
+end
